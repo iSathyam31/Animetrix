@@ -41,7 +41,7 @@ faiss-cpu
 numpy
 
 # ── Google Gemini Vision (Module 2 — Image Character Detection) ───────────────
-google-generativeai
+google-genai
 
 # ── HTTP / Async Utilities ─────────────────────────────────────────────────────
 httpx
