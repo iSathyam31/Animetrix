@@ -157,3 +157,27 @@ async def get_character_by_id(character_id: int) -> dict | None:
         if "not found" in exc.message.lower():
             return None
         raise
+
+
+_SEARCH_ANIME_COVER_QUERY = """
+query SearchAnimeCover($search: String) {
+  Media(search: $search, type: ANIME) {
+    id
+    title { romaji english }
+    coverImage { large }
+  }
+}
+"""
+
+
+async def get_anime_cover(title: str) -> str | None:
+    """
+    Search AniList for an anime by title and return its cover image URL.
+    Returns None if not found.
+    """
+    logger.info("Fetching anime cover for: %s", title)
+    try:
+        data = await _graphql(_SEARCH_ANIME_COVER_QUERY, {"search": title})
+        return data.get("Media", {}).get("coverImage", {}).get("large")
+    except AniListAPIError:
+        return None

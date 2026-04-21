@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     # ── AniList MCP Server (yuna0x0/anilist-mcp) ─────────────────────────────
     # Token optional — only needed for authenticated ops (favourites, list edits)
     ANILIST_TOKEN: str = ""
+    ANILIST_API_URL: str = "https://graphql.anilist.co"
     # "stdio"  → spawns `npx -y anilist-mcp` as subprocess (local dev)
     # "http"   → connects to a running MCP HTTP server (Codespaces / remote)
     ANILIST_MCP_TRANSPORT: str = "stdio"
