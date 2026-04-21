@@ -46,8 +46,9 @@ class Settings(BaseSettings):
     # ── FAISS (vector store — Phase 3+) ───────────────────────────────────────
     FAISS_INDEX_PATH: str = "data/faiss_index"
 
-    # ── Gemini Vision (Module 2 — Image Character Detection) ─────────────────
-    GEMINI_API_KEY: str = ""
+    # ── Google Vertex AI (Module 2 — Image Character Detection) ────────────────
+    GOOGLE_CLOUD_PROJECT: str = ""   # GCP project ID (e.g. my-project-123)
+    GOOGLE_CLOUD_LOCATION: str = "us-central1"  # Vertex AI region
 
 
 @lru_cache

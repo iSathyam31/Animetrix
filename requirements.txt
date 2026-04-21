@@ -42,6 +42,7 @@ numpy
 
 # ── Google Gemini Vision (Module 2 — Image Character Detection) ───────────────
 google-genai
+google-cloud-aiplatform
 
 # ── HTTP / Async Utilities ─────────────────────────────────────────────────────
 httpx
@@ -51,4 +52,4 @@ aiofiles
 # ── Dev / Test ─────────────────────────────────────────────────────────────────
 pytest
 pytest-asyncio
-streamlit
+streamlit                        # Module 2 test UI
