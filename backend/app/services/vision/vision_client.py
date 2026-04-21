@@ -35,10 +35,25 @@ Rules:
 
 
 def _get_client() -> genai.Client:
+    """
+    Initialises the Gemini Vision client.
+    Prioritises API key if GEMINI_VERTEX_KEY is set.
+    Otherwise, falls back to Vertex AI (Project ID + ADC).
+    """
+    if settings.GEMINI_VERTEX_KEY:
+        logger.info("Initialising Gemini Client using Vertex AI API Key")
+        return genai.Client(
+            api_key=settings.GEMINI_VERTEX_KEY,
+            vertexai=True
+        )
+
     if not settings.GOOGLE_CLOUD_PROJECT:
         raise ValueError(
-            "GOOGLE_CLOUD_PROJECT is not set. Add your GCP project ID to .env."
+            "Neither GEMINI_VERTEX_KEY nor GOOGLE_CLOUD_PROJECT is set. "
+            "Please check your .env file."
         )
+
+    logger.info("Initialising Gemini Client using Vertex AI (Project: %s)", settings.GOOGLE_CLOUD_PROJECT)
     return genai.Client(
         vertexai=True,
         project=settings.GOOGLE_CLOUD_PROJECT,
@@ -71,7 +86,7 @@ async def identify_character(image_source: str | bytes) -> dict:
 
     logger.info("Sending image to Gemini Vision for character identification")
 
-    response = client.models.generate_content(
+    response = await client.aio.models.generate_content(
         model=_MODEL,
         contents=[
             _IDENTIFICATION_PROMPT,

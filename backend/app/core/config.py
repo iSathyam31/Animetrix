@@ -50,6 +50,7 @@ class Settings(BaseSettings):
     # ── Google Vertex AI (Module 2 — Image Character Detection) ────────────────
     GOOGLE_CLOUD_PROJECT: str = ""   # GCP project ID (e.g. my-project-123)
     GOOGLE_CLOUD_LOCATION: str = "us-central1"  # Vertex AI region
+    GEMINI_VERTEX_KEY: str = ""
 
 
 @lru_cache
