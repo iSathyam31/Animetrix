@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { detectCharacter, type CharacterDetectionResult } from "@/lib/api";
+import ReactMarkdown from "react-markdown";
 
 const CONFIDENCE_STYLES: Record<string, string> = {
     high: "text-emerald-400 bg-emerald-400/10 border-emerald-400/30",
@@ -187,9 +188,17 @@ export default function DetectPage() {
 
                     {/* Notes */}
                     {result.notes && (
-                        <p className="text-sm text-slate-400 leading-relaxed border-t border-[#2a2a3d] pt-4">
-                            {result.notes}
-                        </p>
+                        <div className="text-sm text-slate-400 leading-relaxed border-t border-[#2a2a3d] pt-4 prose prose-invert prose-sm max-w-none">
+                            <ReactMarkdown
+                                components={{
+                                    img: ({ ...props }) => (
+                                        <img {...props} className="rounded-lg border border-[#2a2a3d] my-2 max-w-[180px] hover:scale-105 transition-transform duration-300 shadow-lg" alt={props.alt || "Anime image"} />
+                                    ),
+                                }}
+                            >
+                                {result.notes}
+                            </ReactMarkdown>
+                        </div>
                     )}
                 </div>
             )}

@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { postChat, clearChat, type ChatResponse } from "@/lib/api";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface Message {
     role: "user" | "assistant";
@@ -123,12 +125,35 @@ export default function ChatPage() {
                             </div>
                         )}
                         <div
-                            className={`max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${msg.role === "user"
-                                ? "bg-cyan-500/20 border border-cyan-500/30 text-slate-200 rounded-tr-sm"
-                                : "bg-[#12121a] border border-[#2a2a3d] text-slate-300 rounded-tl-sm"
+                            className={`max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${msg.role === "user"
+                                ? "bg-cyan-500/20 border border-cyan-500/30 text-slate-200 rounded-tr-sm whitespace-pre-wrap"
+                                : "bg-[#12121a] border border-[#2a2a3d] text-slate-300 rounded-tl-sm prose prose-invert prose-sm max-w-none"
                                 }`}
                         >
-                            {msg.content}
+                            {msg.role === "assistant" ? (
+                                <ReactMarkdown 
+                                    remarkPlugins={[remarkGfm]}
+                                    components={{
+                                        img: ({ ...props }) => (
+                                            <img {...props} className="rounded-lg border border-[#2a2a3d] my-2 max-w-[180px] hover:scale-105 transition-transform duration-300 shadow-lg" alt={props.alt || "Anime image"} />
+                                        ),
+                                        a: ({ ...props }) => (
+                                            <a {...props} className="text-cyan-400 hover:underline" target="_blank" rel="noopener noreferrer" />
+                                        ),
+                                        p: ({ ...props }) => <p {...props} className="mb-2 last:mb-0" />,
+                                        ul: ({ ...props }) => <ul {...props} className="list-disc pl-4 mb-2" />,
+                                        ol: ({ ...props }) => <ol {...props} className="list-decimal pl-4 mb-2" />,
+                                        li: ({ ...props }) => <li {...props} className="mb-1" />,
+                                        h1: ({ ...props }) => <h1 {...props} className="text-lg font-bold mb-2 text-white" />,
+                                        h2: ({ ...props }) => <h2 {...props} className="text-base font-bold mb-2 text-white" />,
+                                        h3: ({ ...props }) => <h3 {...props} className="text-sm font-bold mb-1 text-white" />,
+                                    }}
+                                >
+                                    {msg.content}
+                                </ReactMarkdown>
+                            ) : (
+                                msg.content
+                            )}
                         </div>
                     </div>
                 ))}
