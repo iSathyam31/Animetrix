@@ -1,0 +1,53 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  Anime AI Platform — Full Project Requirements
+#  Install: pip install -r requirements.txt
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ── Web Framework ──────────────────────────────────────────────────────────────
+fastapi
+uvicorn[standard]
+python-multipart
+
+# ── Config & Validation ────────────────────────────────────────────────────────
+pydantic
+pydantic-settings
+python-dotenv
+
+# ── LangChain Core ─────────────────────────────────────────────────────────────
+langchain
+langchain-core
+langchain-community
+
+# ── LangChain — Azure OpenAI (chat + embeddings) ──────────────────────────────
+langchain-openai
+
+# ── LangChain — MongoDB (chat memory) ─────────────────────────────────────────
+langchain-mongodb
+
+# ── LangGraph (agent orchestration) ───────────────────────────────────────────
+langgraph
+langgraph-checkpoint
+
+# ── MCP — AniList MCP adapter (yuna0x0/anilist-mcp) ───────────────────────────
+mcp
+langchain-mcp-adapters
+
+# ── MongoDB ────────────────────────────────────────────────────────────────────
+pymongo
+motor
+
+# ── Vector Store (Phase 3 — Scene Search / Taste DNA) ─────────────────────────
+faiss-cpu
+numpy
+
+# ── Google Gemini Vision (Module 2 — Image Character Detection) ───────────────
+google-generativeai
+
+# ── HTTP / Async Utilities ─────────────────────────────────────────────────────
+httpx
+aiohttp
+aiofiles
+
+# ── Dev / Test ─────────────────────────────────────────────────────────────────
+pytest
+pytest-asyncio
