@@ -51,3 +51,4 @@ aiofiles
 # ── Dev / Test ─────────────────────────────────────────────────────────────────
 pytest
 pytest-asyncio
+streamlit
