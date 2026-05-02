@@ -21,6 +21,13 @@ Animetrix is divided into four powerful, distinct modules:
 
 ---
 
+## 🎥 Project Demo
+
+Watch a full walkthrough of Animetrix and its features here:  
+👉 **[View the Demo on Loom](https://www.loom.com/share/7730c5d96154444fa7b1a635c4885362)**
+
+---
+
 ## 🛠️ Technology Stack
 
 **Frontend:**
