@@ -32,6 +32,10 @@ async def run_comparison(request: ComparisonRequest) -> AnimeComparisonResult:
 
     try:
         result = await compare(a, b)
+        if "error" in result:
+            raise HTTPException(status_code=404, detail=result["error"])
+    except HTTPException:
+        raise
     except Exception as exc:
         logger.error("Comparison failed for '%s' vs '%s': %s", a, b, exc)
         raise HTTPException(status_code=502, detail=f"Comparison failed: {exc}")

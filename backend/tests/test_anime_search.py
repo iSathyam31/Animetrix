@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env"))
 
-from app.services.jikan.anime_client import (  # noqa: E402
+from app.services.anilist.encyclopedia_client import (  # noqa: E402
     get_anime_detail_page,
     search_anime,
 )

@@ -3,7 +3,7 @@ from typing import List
 
 from app.core.logging import get_logger
 from app.schemas.anime import AnimeDetailPage, AnimeSearchResult
-from app.services.jikan.anime_client import get_anime_detail_page, search_anime
+from app.services.anilist.encyclopedia_client import get_anime_detail_page, search_anime
 
 router = APIRouter()
 logger = get_logger(__name__)

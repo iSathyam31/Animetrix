@@ -17,7 +17,7 @@ Animetrix is divided into four powerful, distinct modules:
 3. ⚔️ **Anime Battle (Head-to-Head Comparison)**
    - Pit any two anime against each other. Our AI evaluates them across multiple dimensions (Story, Animation, Characters, Sound, and Enjoyment) to declare the ultimate winner.
 4. 📚 **Encyclopedia Search (Database)**
-   - Search a comprehensive database of over 24,000 anime titles (powered by Jikan / MyAnimeList). Browse synopses, cast, staff, community scores, and trailers.
+   - Search a comprehensive database of over 24,000 anime titles (powered by the AniList GraphQL API). Browse synopses, cast, staff, community scores, and trailers.
 
 ---
 
@@ -43,7 +43,7 @@ Animetrix is divided into four powerful, distinct modules:
 **Databases & Integrations:**
 - **MongoDB:** Stores persistent chat histories.
 - **FAISS:** Local vector database for embedding retrieval.
-- **Jikan API:** Unofficial MyAnimeList REST API for live anime metadata.
+- **AniList GraphQL API:** Official API for live anime metadata, searches, and comparisons.
 - **AniList MCP Server:** Contextual user list operations.
 
 ---

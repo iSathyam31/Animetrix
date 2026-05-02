@@ -36,12 +36,12 @@ export default function SearchPage() {
             {/* Page header */}
             <div className="mb-12 text-center">
                 <span className="rounded-full border border-emerald-500/20 bg-emerald-500/[0.08] px-4 py-1 text-xs font-semibold tracking-widest text-emerald-300 uppercase">
-                    Jikan · AniList
+                    AniList GraphQL
                 </span>
                 <h1 className="mt-4 font-display text-3xl font-bold tracking-widest text-slate-100">
                     Anime <span className="gradient-text">Encyclopedia</span>
                 </h1>
-                <p className="mt-2 text-sm text-slate-500">Search over 24,000 anime titles from MyAnimeList</p>
+                <p className="mt-2 text-sm text-slate-500">Search over 24,000 anime titles from the AniList database</p>
             </div>
 
             {/* Search bar */}

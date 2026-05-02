@@ -6,7 +6,7 @@ from langchain_core.messages import HumanMessage
 
 from app.core.logging import get_logger
 from app.services.ai.llm import get_llm
-from app.services.jikan.character_client import search_anime
+from app.services.anilist.client import search_anime
 
 logger = get_logger(__name__)
 
@@ -23,7 +23,7 @@ def _parse_json(raw_text: str) -> dict:
 
 _ANIME_ANALYSIS_PROMPT = """You are Verdict — an elite anime analyst AI.
 
-You have been given MAL/Jikan data for two anime. Analyse them and return ONLY a valid JSON object.
+You have been given AniList data for two anime. Analyse them and return ONLY a valid JSON object.
 
 Anime A data:
 {anime_a_json}
@@ -57,16 +57,16 @@ Return EXACTLY this JSON (no prose, no markdown fences):
 }}
 
 Rules:
-- Use MAL score as an anchor but apply your own analysis per dimension.
+- Use the provided score as an anchor but apply your own analysis per dimension.
 - Scores must be floats 0.0-10.0. Avoid identical scores across all dimensions.
 - "winner" must be the exact anime title or "Tie".
 - Output ONLY the JSON.
 """
 
-# ── Anime comparison (Jikan) ──────────────────────────────────────────────────
+# ── Anime comparison (AniList) ──────────────────────────────────────────────────
 
 async def _compare_anime(subject_a: str, subject_b: str) -> dict:
-    logger.info("Jikan: fetching anime '%s' and '%s'", subject_a, subject_b)
+    logger.info("AniList: fetching anime '%s' and '%s'", subject_a, subject_b)
 
     anime_a, anime_b = await asyncio.gather(
         search_anime(subject_a),
@@ -74,13 +74,13 @@ async def _compare_anime(subject_a: str, subject_b: str) -> dict:
     )
 
     if not anime_a:
-        return {"error": f"Could not find anime '{subject_a}' on MyAnimeList. Please check the title."}
+        return {"error": f"Could not find anime '{subject_a}' on AniList. Please check the title."}
     if not anime_b:
-        return {"error": f"Could not find anime '{subject_b}' on MyAnimeList. Please check the title."}
+        return {"error": f"Could not find anime '{subject_b}' on AniList. Please check the title."}
 
-    logger.info("Found: '%s' (MAL id=%s) and '%s' (MAL id=%s)",
-                anime_a.get("title"), anime_a.get("mal_id"),
-                anime_b.get("title"), anime_b.get("mal_id"))
+    logger.info("Found: '%s' (AniList id=%s) and '%s' (AniList id=%s)",
+                anime_a.get("title"), anime_a.get("anilist_id"),
+                anime_b.get("title"), anime_b.get("anilist_id"))
 
     prompt = _ANIME_ANALYSIS_PROMPT.format(
         anime_a_json=json.dumps(anime_a, indent=2),
@@ -117,7 +117,7 @@ async def _compare_anime(subject_a: str, subject_b: str) -> dict:
 
 async def compare(subject_a: str, subject_b: str) -> dict:
     """
-    Run a head-to-head anime comparison using Jikan (MAL) data.
+    Run a head-to-head anime comparison using AniList data.
 
     Args:
         subject_a: Name of the first anime.
