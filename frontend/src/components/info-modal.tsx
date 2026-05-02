@@ -51,7 +51,8 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
         };
     }, [isOpen]);
 
-    if (!mounted) return null;
+    const container = typeof document !== "undefined" ? document.body : null;
+    if (!mounted || !container) return null;
 
     return createPortal(
         <AnimatePresence>
