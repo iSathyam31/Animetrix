@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles, Info } from "lucide-react";
+import InfoModal from "./info-modal";
 
 const NAV_LINKS = [
     { href: "/chat",    label: "Chat",     emoji: "💬" },
@@ -15,6 +16,7 @@ const NAV_LINKS = [
 export default function Navbar() {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
+    const [infoOpen, setInfoOpen] = useState(false);
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.04] bg-[#07070f]/80 backdrop-blur-xl">
@@ -59,12 +61,13 @@ export default function Navbar() {
 
                 {/* Desktop CTA */}
                 <div className="hidden md:flex items-center gap-3">
-                    <Link
-                        href="/chat"
-                        className="rounded-lg bg-indigo-600/90 px-4 py-1.5 text-sm font-semibold text-white hover:bg-indigo-500 transition-all duration-200 shadow-[0_0_16px_rgba(99,102,241,0.25)] hover:shadow-[0_0_20px_rgba(99,102,241,0.35)]"
+                    <button
+                        onClick={() => setInfoOpen(true)}
+                        className="rounded-lg bg-white/[0.04] px-4 py-1.5 text-sm font-semibold text-slate-200 hover:bg-white/[0.08] transition-all duration-200 flex items-center gap-2 border border-white/[0.04]"
                     >
-                        Talk to Chibi
-                    </Link>
+                        <Info className="w-4 h-4 text-slate-400" />
+                        How to use
+                    </button>
                 </div>
 
                 {/* Mobile hamburger */}
@@ -99,16 +102,18 @@ export default function Navbar() {
                         );
                     })}
                     <div className="pt-2 border-t border-white/[0.04]">
-                        <Link
-                            href="/chat"
-                            onClick={() => setOpen(false)}
-                            className="block w-full text-center rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 transition-colors"
+                        <button
+                            onClick={() => { setInfoOpen(true); setOpen(false); }}
+                            className="flex w-full items-center justify-center gap-2 rounded-lg bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-slate-200 hover:bg-white/[0.08] transition-colors border border-white/[0.04]"
                         >
-                            Talk to Chibi →
-                        </Link>
+                            <Info className="w-4 h-4 text-slate-400" />
+                            How to use
+                        </button>
                     </div>
                 </div>
             )}
+
+            <InfoModal isOpen={infoOpen} onClose={() => setInfoOpen(false)} />
         </nav>
     );
 }

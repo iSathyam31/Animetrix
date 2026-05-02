@@ -85,11 +85,11 @@ export async function getAnimeDetail(malId: number): Promise<any> {
     return res.json();
 }
 
-export async function postChat(message: string, userId: string, sessionId: string): Promise<ChatResponse> {
+export async function postChat(req: { message: string; user_id: string; session_id?: string }): Promise<ChatResponse> {
     const res = await fetch(`${API_BASE}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, user_id: userId, session_id: sessionId })
+        body: JSON.stringify(req)
     });
     if (!res.ok) throw new Error("Chat request failed");
     return res.json();
