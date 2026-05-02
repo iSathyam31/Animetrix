@@ -118,6 +118,9 @@ ANILIST_TOKEN="your_anilist_token_here"
 
 ## 🚀 Installation & Running Locally
 
+> [!WARNING]
+> **Bring Your Own Keys (BYOK):** Due to the high costs associated with cloud AI services, the live demonstration of this application may have certain features (such as Azure OpenAI chat or Google Vertex Character Detection) rate-limited or disabled. To run this project locally, you **must** supply your own API keys and credentials in the `.env` file as shown above.
+
 ### 1. Start the Backend (FastAPI)
 
 Open a terminal and navigate to the `backend` folder:
